@@ -3,7 +3,7 @@ view: revenue_forecast {
 
   measure: ACTUAL {
     type: sum
-    sql: ${TABLE}.ACTUL ;;
+    sql: ${TABLE}.ACTUAL ;;
   }
 
   dimension_group: date {
