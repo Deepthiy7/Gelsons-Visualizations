@@ -52,10 +52,22 @@ explore: revenue_forecast {}
 
 explore: seasonal_upc {}
 
-explore: substitutable_product_flag {}
+explore: substitutable_product_flag {
+#     join: transaction_summary {
+#       type: inner
+#       relationship: one_to_one
+#       sql_on: ${transaction_summary.substitutable_product_flag_category_name} = ${substitutable_product_flag.category_name} AND
+#               ${transaction_summary.substitutable_product_flag_sub_category_name} = ${substitutable_product_flag.sub_category_name} AND
+#               ${transaction_summary.substitutable_product_flag_month} = ${substitutable_product_flag.month}  AND
+#               ${transaction_summary.substitutable_product_flag_year} = ${substitutable_product_flag.year} AND
+#               ${transaction_summary.substitutable_flag} = ${substitutable_product_flag.substitutable_flag}
+#       ;;
+#     }
+}
 
 explore: substitute_product_item_list {}
 
 explore: transactions_ {}
 
 explore: revenue_forecast_view {}
+explore: substitutable_product_drill_down {}
