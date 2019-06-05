@@ -56,8 +56,14 @@ view: substitutable_product_flag {
     sql: ${TABLE}.year ;;
   }
 
+  dimension: true_substitutable_flag {
+    type: string
+    sql: ${TABLE}.substitutable_flag
+      ;;
+  }
+
   measure: count {
     type: count
-    drill_fields: [sub_category_name, category_name]
+    drill_fields: [category_name,sub_category_name,upc,substitutable_flag]
   }
 }
