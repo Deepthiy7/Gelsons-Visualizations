@@ -54,6 +54,7 @@ view: substitutable_product_flag {
   dimension: year {
     type: number
     sql: ${TABLE}.year ;;
+
   }
 
   dimension: true_substitutable_flag {
@@ -64,6 +65,6 @@ view: substitutable_product_flag {
 
   measure: count {
     type: count
-    drill_fields: [category_name,sub_category_name,upc,substitutable_flag]
+    drill_fields: [category_name,sub_category_name,no_of_customers,frequency_of_purchase,avg_unit_purchased,avg_price, upc,substitutable_flag]
   }
 }
