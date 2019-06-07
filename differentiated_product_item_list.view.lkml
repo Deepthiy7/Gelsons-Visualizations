@@ -22,7 +22,7 @@ view: differentiated_product_item_list {
   }
 
   dimension: upc {
-    type: number
+    type: string
     sql: ${TABLE}.UPC ;;
   }
 
@@ -31,6 +31,10 @@ view: differentiated_product_item_list {
     sql: ${TABLE}.weighted_sequence ;;
   }
 
+  dimension: description {
+    type: string
+    sql: ${TABLE}.description  ;;
+  }
   measure: count {
     type: count
     drill_fields: [sub_category_name, category_name]

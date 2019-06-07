@@ -40,6 +40,12 @@ view: revenue_forecast {
     type: count
     drill_fields: []
   }
+
+  dimension: PRODUCT_NAME{
+    type: string
+    sql: ${TABLE}.product_name  ;;
+  }
+
   set: detail {
     fields: [date_date, STORE_ID, UPC, ACTUAL, FORECAST]
   }

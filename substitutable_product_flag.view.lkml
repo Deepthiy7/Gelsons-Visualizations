@@ -63,6 +63,11 @@ view: substitutable_product_flag {
       ;;
   }
 
+  dimension: description {
+    type: string
+    sql: ${TABLE}.product_name  ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [category_name,sub_category_name,no_of_customers,frequency_of_purchase,avg_unit_purchased,avg_price, upc,substitutable_flag]
