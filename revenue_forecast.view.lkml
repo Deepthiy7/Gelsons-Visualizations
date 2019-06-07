@@ -21,6 +21,11 @@ view: revenue_forecast {
     sql: ${TABLE}.DATE ;;
   }
 
+  dimension: week {
+    type: string
+    sql: ${TABLE}.DATE ;;
+  }
+
   measure: FORECAST {
     type: sum
     sql: ${TABLE}.FORECAST ;;
@@ -32,18 +37,18 @@ view: revenue_forecast {
   }
 
   dimension: UPC {
-    type: string
+    type: number
     sql: ${TABLE}.UPC ;;
+  }
+
+  dimension: product_name {
+    type: string
+    sql: ${TABLE}.product_name ;;
   }
 
   measure: count {
     type: count
     drill_fields: []
-  }
-
-  dimension: PRODUCT_NAME{
-    type: string
-    sql: ${TABLE}.product_name  ;;
   }
 
   set: detail {
