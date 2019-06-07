@@ -32,7 +32,7 @@ view: revenue_forecast {
   }
 
   dimension: UPC {
-    type: number
+    type: string
     sql: ${TABLE}.UPC ;;
   }
 
