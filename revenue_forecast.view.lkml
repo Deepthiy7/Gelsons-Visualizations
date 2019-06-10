@@ -32,12 +32,12 @@ view: revenue_forecast {
   }
 
   dimension: STORE_ID {
-    type: number
+    type: string
     sql: ${TABLE}.STORE_ID ;;
   }
 
   dimension: UPC {
-    type: number
+    type: string
     sql: ${TABLE}.UPC ;;
   }
 
