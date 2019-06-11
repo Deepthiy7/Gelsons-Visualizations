@@ -3,7 +3,6 @@ view: customer_cluster_demographics {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
   dimension: cust_name {
@@ -56,12 +55,13 @@ view: customer_cluster_demographics {
     sql: ${TABLE}.unique_id ;;
   }
 
-  measure: customer_id {
-    type: sum
+  dimension: customer_id {
+    type: number
     sql: ${TABLE}.CustomerID ;;
-    value_format: "0"
-    drill_fields: [cust_name,income_level,gender,house_type,family_type,age_type,childs,education_level,avg_dist,store_id]
-
+    link: {
+      label: "Additional Customer Details"
+      url:"/looks/10?&f[customer_cluster_demographics.customer_id]={{ value }}"
+    }
   }
 
   dimension: avg_dist {
