@@ -69,5 +69,8 @@ explore: substitute_product_item_list {}
 
 explore: transactions_ {}
 
-explore: revenue_forecast_view {}
-explore: substitutable_product_drill_down {}
+explore: substitutable_products_by_upc {}
+
+explore: substitutable_product_by_line_code {}
+
+explore: : customer_cluster_demographics{}
