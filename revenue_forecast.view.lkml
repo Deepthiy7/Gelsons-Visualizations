@@ -46,6 +46,17 @@ view: revenue_forecast {
     sql: ${TABLE}.product_name ;;
   }
 
+  dimension: category_name {
+    type: string
+    sql: ${TABLE}.CategoryName ;;
+  }
+
+  dimension: sub_category_name {
+    type: string
+    sql: ${TABLE}.SubCategoryName ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: []
