@@ -3,6 +3,8 @@ view: customer_cluster_demographics {
 
   measure: count {
     type: count
+    drill_fields: [cust_name, customer_type,income_level,gender,house_type,family_type,age_type,
+      childs,education_level,unique_id,customer_id,store_id,avg_dist]
   }
 
   dimension: cust_name {
@@ -58,20 +60,24 @@ view: customer_cluster_demographics {
   dimension: customer_id {
     type: number
     sql: ${TABLE}.CustomerID ;;
-    link: {
-      label: "Additional Customer Details"
-      url:"/looks/10?&f[customer_cluster_demographics.customer_id]={{ value }}"
-    }
+#     link: {
+#       label: "Additional Customer Details"
+#        url:"/looks/10?&f[customer_cluster_demographics.customer_id]={{ value }}"
+#     }
   }
 
-  dimension: avg_dist {
-    type: number
-    sql: ${TABLE}.avg_dist ;;
+  measure: avg_dist {
+    type: sum
+    sql: CAST(${TABLE}.avg_dist AS NUMERIC);;
+    drill_fields: [cust_name, customer_type,income_level,gender,house_type,family_type,age_type,
+      childs,education_level,unique_id,customer_id,store_id,avg_dist]
   }
 
-  dimension: store_id {
-    type: string
-    sql: ${TABLE}.store_id ;;
+  measure: store_id {
+    type: sum
+    sql: cast(${TABLE}.store_id as numeric);;
+    drill_fields: [cust_name, customer_type,income_level,gender,house_type,family_type,age_type,
+      childs,education_level,unique_id,customer_id,store_id,avg_dist]
   }
 
   set: detail {
