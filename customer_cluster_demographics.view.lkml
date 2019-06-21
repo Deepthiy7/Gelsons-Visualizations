@@ -69,6 +69,7 @@ view: customer_cluster_demographics {
   measure: avg_dist {
     type: sum
     sql: CAST(${TABLE}.avg_dist AS NUMERIC);;
+    value_format: "0000"
     drill_fields: [cust_name, customer_type,income_level,gender,house_type,family_type,age_type,
       childs,education_level,unique_id,customer_id,store_id,avg_dist]
   }
