@@ -16,7 +16,7 @@ view: substitutable_products_by_upc {
   }
 
   dimension: upc {
-    type: number
+    type: string
     sql: CAST(${TABLE}.UPC AS STRING) ;;
   }
 
@@ -41,9 +41,8 @@ view: substitutable_products_by_upc {
   }
 
   dimension: substitutable_upc {
-    type: number
-    sql: ${TABLE}.substitutable_upc ;;
-    value_format:"000000000000;"
+    type: string
+    sql: CAST(${TABLE}.substitutable_upc  AS string);;
   }
 
   dimension: ranking {
