@@ -1,30 +1,13 @@
 view: customer_cluster_demographics {
-  sql_table_name: substitutableProduct.customer_cluster_demographics ;;
 
   measure: count {
     type: count
-    drill_fields: [cust_name, customer_type,income_level,gender,house_type,family_type,age_type,
-      childs,education_level,unique_id,customer_id,store_id,avg_dist]
+
   }
 
-  dimension: cust_name {
+  dimension: customer_id {
     type: string
-    sql: ${TABLE}.cust_name ;;
-  }
-
-  dimension: customer_type {
-    type: string
-    sql: ${TABLE}.Customer_Type ;;
-  }
-
-  dimension: income_level {
-    type: string
-    sql: ${TABLE}.Income_Level ;;
-  }
-
-  dimension: gender {
-    type: string
-    sql: ${TABLE}.Gender ;;
+    sql: CAST(${TABLE}.CustomerID AS string) ;;
   }
 
   dimension: house_type {
@@ -32,9 +15,14 @@ view: customer_cluster_demographics {
     sql: ${TABLE}.House_Type ;;
   }
 
-  dimension: family_type {
+  dimension: gender {
     type: string
-    sql: ${TABLE}.Family_Type ;;
+    sql: ${TABLE}.Gender ;;
+  }
+
+  dimension: income_level {
+    type: string
+    sql: ${TABLE}.Income_Level ;;
   }
 
   dimension: age_type {
@@ -42,60 +30,58 @@ view: customer_cluster_demographics {
     sql: ${TABLE}.Age_Type ;;
   }
 
-  dimension: childs {
-    type: string
-    sql: ${TABLE}.Childs ;;
-  }
-
   dimension: education_level {
     type: string
     sql: ${TABLE}.Education_Level ;;
   }
 
-  dimension: unique_id {
-    type: number
-    sql: ${TABLE}.unique_id ;;
+  dimension: cust_name {
+    type: string
+    sql: ${TABLE}.cust_name ;;
   }
 
-  dimension: customer_id {
-    type: number
-    sql: ${TABLE}.CustomerID ;;
-#     link: {
-#       label: "Additional Customer Details"
-#        url:"/looks/10?&f[customer_cluster_demographics.customer_id]={{ value }}"
-#     }
-  }
-
-  measure: avg_dist {
-    type: sum
-    sql: CAST(${TABLE}.avg_dist AS NUMERIC);;
-    value_format: "0000"
-    drill_fields: [cust_name, customer_type,income_level,gender,house_type,family_type,age_type,
-      childs,education_level,unique_id,customer_id,store_id,avg_dist]
+  dimension: email {
+    type: string
+    sql: ${TABLE}.email ;;
   }
 
   measure: store_id {
     type: sum
-    sql: cast(${TABLE}.store_id as numeric);;
-    drill_fields: [cust_name, customer_type,income_level,gender,house_type,family_type,age_type,
-      childs,education_level,unique_id,customer_id,store_id,avg_dist]
+    sql: ${TABLE}.store_id ;;
+    drill_fields: [cust_name,gender,age_type,education_level,house_type,income_level,childs,store_id,avg_dist]
+  }
+
+  measure: avg_dist {
+    type: sum
+    sql: ROUND(CAST(${TABLE}.avg_dist  AS numeric),2);;
+    value_format:"#.00;"
+    drill_fields: [cust_name,gender,age_type,education_level,house_type,income_level,childs,store_id,avg_dist]
+  }
+
+  dimension: childs {
+    type: string
+    sql: ${TABLE}.childs ;;
+  }
+
+  dimension: customer_type {
+    type: string
+    sql: ${TABLE}.Customer_Type ;;
   }
 
   set: detail {
     fields: [
-      cust_name,
-      customer_type,
-      income_level,
-      gender,
-      house_type,
-      family_type,
-      age_type,
-      childs,
-      education_level,
-      unique_id,
       customer_id,
+      house_type,
+      gender,
+      income_level,
+      age_type,
+      education_level,
+      cust_name,
+      email,
+      store_id,
       avg_dist,
-      store_id
+      childs,
+      customer_type
     ]
   }
 }
