@@ -16,21 +16,21 @@ view: substitutable_product_by_line_code {
   }
 
   dimension: line_code {
-    type: number
-    sql: ${TABLE}.LineCode ;;
-    value_format:"000000000000;"
+    type: string
+    sql: CAST(${TABLE}.LineCode  as string);;
+#     value_format:"000000000000;"
   }
 
   dimension: upc {
-    type: number
-    sql: ${TABLE}.UPC ;;
-    value_format:"000000000000;"
+    type: string
+    sql: Cast(${TABLE}.UPC  as string);;
+#     value_format:"000000000000;"
   }
 
   dimension: no_of_customers {
     type: number
     sql: ${TABLE}.no_of_customers ;;
-    value_format:"000000000000;"
+#     value_format:"000000000000;"
   }
 
   dimension: frequency_of_purchase {

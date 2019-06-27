@@ -39,6 +39,8 @@ view: revenue_forecast {
   dimension: UPC {
     type: string
     sql: ${TABLE}.UPC ;;
+    value_format:"000000000000;"
+
   }
 
   dimension: product_name {

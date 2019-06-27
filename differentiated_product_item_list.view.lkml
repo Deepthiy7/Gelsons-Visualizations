@@ -24,6 +24,7 @@ view: differentiated_product_item_list {
   dimension: upc {
     type: string
     sql: ${TABLE}.UPC ;;
+    value_format:"000000000000;"
   }
 
   dimension: weighted_sequence {

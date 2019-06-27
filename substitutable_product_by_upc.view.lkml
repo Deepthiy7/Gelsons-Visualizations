@@ -17,8 +17,7 @@ view: substitutable_products_by_upc {
 
   dimension: upc {
     type: number
-    sql: ${TABLE}.UPC ;;
-    value_format:"000000000000;"
+    sql: CAST(${TABLE}.UPC AS STRING) ;;
   }
 
   dimension: no_of_customers {
