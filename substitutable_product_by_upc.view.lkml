@@ -5,6 +5,12 @@ view: substitutable_products_by_upc {
     drill_fields: [ranking,category_name,sub_category_name,substitutable_product_name,substitutable_upc]
   }
 
+  measure: row_number {
+    type: average
+    sql: ${TABLE}.row_number ;;
+    drill_fields: [category_name,sub_category_name,product_name,no_of_customers,frequency_of_purchase,avg_unit_purchased,avg_price]
+  }
+
   dimension: category_name {
     type: string
     sql: ${TABLE}.CategoryName ;;
