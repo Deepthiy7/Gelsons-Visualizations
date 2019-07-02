@@ -1,6 +1,16 @@
 view: differentiated_product_item_list {
   sql_table_name: substitutableProduct.differentiated_product_item_list ;;
 
+  dimension: product_size {
+    type: string
+    sql: CAST(${TABLE}.productSize AS string) ;;
+  }
+
+  dimension: unit_of_measure {
+    type: string
+    sql: ${TABLE}.UnitOfMeasure;;
+  }
+
   dimension: category_name {
     type: string
     sql: ${TABLE}.CategoryName ;;

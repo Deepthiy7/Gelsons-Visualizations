@@ -48,14 +48,14 @@ view: customer_cluster_demographics {
   measure: store_id {
     type: sum
     sql: ${TABLE}.store_id ;;
-    drill_fields: [cust_name,gender,age_type,education_level,house_type,income_level,childs,store_id,avg_dist]
+    drill_fields: [cust_name,gender,age_type,education_level,house_type,income_level,childs,StoreName]
   }
 
   measure: avg_dist {
     type: sum
     sql: ROUND(CAST(${TABLE}.avg_dist  AS numeric),2);;
     value_format:"#;"
-    drill_fields: [cust_name,gender,age_type,education_level,house_type,income_level,childs,store_id,avg_dist]
+    drill_fields: [cust_name,gender,age_type,education_level,house_type,income_level,childs,StoreName]
   }
 
   dimension: childs {
@@ -66,6 +66,11 @@ view: customer_cluster_demographics {
   dimension: customer_type {
     type: string
     sql: ${TABLE}.Customer_Type ;;
+  }
+
+  dimension: StoreName {
+    type: string
+    sql: ${TABLE}.StoreName ;;
   }
 
   set: detail {
