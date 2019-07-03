@@ -4,6 +4,7 @@ view: revenue_forecast {
   measure: ACTUAL {
     type: sum
     sql: ${TABLE}.ACTUAL ;;
+    value_format:"$0"
   }
 
   dimension_group: date {
