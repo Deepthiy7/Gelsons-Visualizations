@@ -29,7 +29,7 @@ view: revenue_forecast {
   measure: FORECAST {
     type: sum
     sql: ${TABLE}.FORECAST ;;
-    value_format:"$#"
+    value_format:"$0"
   }
 
   dimension: STORE_ID {
