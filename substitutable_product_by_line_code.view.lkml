@@ -36,7 +36,7 @@ view: substitutable_product_by_line_code {
   dimension: frequency_of_purchase {
     type: number
     sql: ${TABLE}.frequency_of_purchase ;;
-    value_format:"000000000000;"
+    value_format:"#;"
   }
 
   dimension: avg_unit_purchased {
@@ -50,9 +50,10 @@ view: substitutable_product_by_line_code {
   }
 
   dimension: substitutable_upc {
+    label: "Substitutable UPC"
     type: number
     sql: ${TABLE}.substitutable_upc ;;
-    value_format:"000000000000;"
+    value_format:"#;"
   }
 
   dimension: ranking {
@@ -63,7 +64,6 @@ view: substitutable_product_by_line_code {
   dimension: product_name {
     type: string
     sql: ${TABLE}.product_name ;;
-    value_format:"000000000000;"
   }
 
   dimension: substitutable_product_name {

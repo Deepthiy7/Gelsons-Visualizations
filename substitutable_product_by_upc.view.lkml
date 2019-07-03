@@ -47,6 +47,7 @@ view: substitutable_products_by_upc {
   }
 
   dimension: substitutable_upc {
+    label: "Substitutable UPC"
     type: string
     sql: CAST(${TABLE}.substitutable_upc  AS string);;
   }

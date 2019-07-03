@@ -36,6 +36,7 @@ view: customer_cluster_demographics {
   }
 
   dimension: cust_name {
+    label: "Customer Name"
     type: string
     sql: ${TABLE}.cust_name ;;
   }
@@ -59,6 +60,7 @@ view: customer_cluster_demographics {
   }
 
   dimension: childs {
+    label: "Children"
     type: string
     sql: ${TABLE}.childs ;;
   }
@@ -69,6 +71,7 @@ view: customer_cluster_demographics {
   }
 
   dimension: StoreName {
+    label: "Store Name"
     type: string
     sql: ${TABLE}.StoreName ;;
   }

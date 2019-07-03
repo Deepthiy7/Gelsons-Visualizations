@@ -29,6 +29,7 @@ view: revenue_forecast {
   measure: FORECAST {
     type: sum
     sql: ${TABLE}.FORECAST ;;
+    value_format:"$#"
   }
 
   dimension: STORE_ID {
@@ -36,10 +37,15 @@ view: revenue_forecast {
     sql: ${TABLE}.STORE_ID ;;
   }
 
+  dimension: STORE_NAME {
+    type: string
+    sql: ${TABLE}.StoreName ;;
+  }
+
   dimension: UPC {
     type: string
     sql: ${TABLE}.UPC ;;
-    value_format:"000000000000;"
+    value_format:"$#"
 
   }
 
