@@ -27,8 +27,8 @@ view: revenue_forecast {
     sql: ${TABLE}.DATE ;;
   }
 
-  measure: FORECAST {
-    type: sum
+  dimension: FORECAST {
+    type: number
     sql: ${TABLE}.FORECAST ;;
      value_format:"$0"
   }
@@ -75,10 +75,10 @@ view: revenue_forecast {
   measure: row_number {
     type: number
      sql:  Dense_rank() over(order by upc) ;;
-    drill_fields: [week,UPC,FORECAST]
+    drill_fields: [DATE.week,week,UPC,FORECAST]
   }
 
-  dimension: serial_number {
+  measure: serial_number {
     type: number
     sql:  Dense_rank() over(order by upc) ;;
   }
