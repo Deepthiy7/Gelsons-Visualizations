@@ -30,6 +30,7 @@ view: revenue_forecast {
   measure: FORECAST {
     type: sum
     sql: ${TABLE}.FORECAST ;;
+     value_format:"$0"
   }
 
   dimension: STORE_ID {
@@ -46,8 +47,15 @@ view: revenue_forecast {
     type: string
     sql: ${TABLE}.UPC ;;
     value_format:"$#"
+    drill_fields: [UPC,FORECAST]
 
   }
+
+  dimension: UPC_filter {
+    type: number
+    sql: ${TABLE}.UPC_FILTER ;;
+  }
+
 
   dimension: product_name {
     type: string
@@ -64,6 +72,16 @@ view: revenue_forecast {
     sql: ${TABLE}.SubCategoryName ;;
   }
 
+  measure: row_number {
+    type: number
+     sql:  Dense_rank() over(order by upc) ;;
+    drill_fields: [week,UPC,FORECAST]
+  }
+
+  dimension: serial_number {
+    type: number
+    sql:  Dense_rank() over(order by upc) ;;
+  }
 
   measure: count {
     type: count
