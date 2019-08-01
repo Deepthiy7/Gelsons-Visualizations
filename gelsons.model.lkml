@@ -73,4 +73,10 @@ explore: substitutable_products_by_upc {}
 
 explore: substitutable_product_by_line_code {}
 
-explore: : customer_cluster_demographics{}
+explore: customer_cluster_demographics{}
+
+explore:  items_by_customer_type{}
+
+explore: substitutable_products_by_customer_type{}
+
+explore: upc_summary_ranking {}
