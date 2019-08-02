@@ -1,5 +1,9 @@
-view: upc_summary_ranking{
-  sql_table_name: substitutableProduct.upc_summary_ranking   ;;
+view: upc_summary_ranking {
+  derived_table: {
+    sql: SELECT a.*,b. DATE, b.ACTUAL, b.FORECAST, b.revenue_forecast_Status  FROM `substitutableProduct.upc_summary_ranking` AS  a LEFT JOIN `substitutableProduct.upc_summary_revenue`   AS b ON  CAST(a.upc AS STRING) = b.upc
+      ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -7,11 +11,11 @@ view: upc_summary_ranking{
 
   dimension: upc {
     type: string
-    sql: CAST(${TABLE}.UPC as String) ;;
+    sql: CAST(${TABLE}.UPC AS STRING);;
   }
 
-  dimension: upc_count {
-    type: number
+  measure: upc_count {
+    type: average
     sql: ${TABLE}.upc_count ;;
   }
 
@@ -50,9 +54,10 @@ view: upc_summary_ranking{
     sql: ${TABLE}.substitutable_rank ;;
   }
 
-  dimension: diff_rank {
-    type: number
+  measure: diff_rank {
+    type: average
     sql: ${TABLE}.diff_rank ;;
+    drill_fields: [date,forecast]
   }
 
   dimension: unit_rank {
@@ -70,11 +75,40 @@ view: upc_summary_ranking{
     sql: ${TABLE}.cust_imp_rank_by_cat ;;
   }
 
-  dimension: overall_cust_imp_rank {
-    type: number
+  measure: overall_cust_imp_rank {
+    type: average
     sql: ${TABLE}.overall_cust_imp_rank ;;
     value_format: "#"
+    drill_fields: [date,forecast]
   }
+
+  dimension: date {
+    type: string
+    sql: ${TABLE}.DATE ;;
+  }
+
+  dimension: actual {
+    type: number
+    sql: ${TABLE}.ACTUAL ;;
+  }
+
+  dimension: forecast {
+    type: number
+    sql: ${TABLE}.FORECAST ;;
+    value_format: "$#"
+  }
+
+  dimension: revenue_forecast_status {
+    type: string
+    sql: ${TABLE}.revenue_forecast_Status ;;
+  }
+
+  measure: conv_rank {
+    type: number
+    sql: row_number() over(partition by ${category_name},${sub_category_name} order by ${category_name},${sub_category_name},${upc_count} desc) ;;
+  drill_fields: [date,forecast]
+  }
+
 
   set: detail {
     fields: [
@@ -89,8 +123,13 @@ view: upc_summary_ranking{
       substitutable_rank,
       diff_rank,
       unit_rank,
+      sales_rank,
       cust_imp_rank_by_cat,
-      overall_cust_imp_rank
+      overall_cust_imp_rank,
+      date,
+      actual,
+      forecast,
+      revenue_forecast_status
     ]
   }
 }
