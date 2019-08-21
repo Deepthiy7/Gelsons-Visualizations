@@ -109,6 +109,23 @@ view: upc_summary_ranking {
   drill_fields: [date,forecast]
   }
 
+  dimension: cum_quantity {
+    type: number
+    sql: ceil(${TABLE}.cum_quantity) ;;
+    value_format: "#"
+  }
+
+  dimension: cum_net_sales {
+    type: number
+    sql: ceil(${TABLE}.cum_net_sales) ;;
+    value_format: "#"
+  }
+
+  dimension: sales_percentile {
+    type: number
+    sql: ${TABLE}.sales_percentile ;;
+
+  }
 
   set: detail {
     fields: [
