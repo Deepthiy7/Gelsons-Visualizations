@@ -36,7 +36,7 @@ view: upc_summary_ranking {
 
   dimension: sub_category_name {
     type: string
-    sql: ${TABLE}.SubCategoryName ;;
+    sql: ${TABLE}.SubCategoryName;;
   }
 
   dimension: description {
@@ -51,7 +51,7 @@ view: upc_summary_ranking {
 
   dimension: substitutable_rank {
     type: number
-    sql: ${TABLE}.substitutable_rank ;;
+    sql: ${TABLE}.substitutable_rank;;
   }
 
   measure: diff_rank {
@@ -60,15 +60,16 @@ view: upc_summary_ranking {
     drill_fields: [date,forecast]
   }
 
-  dimension: unit_rank {
-    type: number
-    sql: ${TABLE}.unit_rank ;;
-  }
+   dimension: unit_rank {
+     type: number
+     sql: ${TABLE}.cum_qunatity_rank ;;
+   }
 
-  dimension: sales_rank {
-    type: number
-    sql: ${TABLE}.sales_rank ;;
-  }
+   dimension: sales_rank {
+     type: number
+     sql: ${TABLE}.cum_net_sales_rank ;;
+   }
+
 
   dimension: cust_imp_rank_by_cat {
     type: number
@@ -118,21 +119,40 @@ view: upc_summary_ranking {
   dimension: cum_net_sales {
     type: number
     sql: ceil(${TABLE}.cum_net_sales) ;;
-    value_format: "#"
+    value_format: "$#"
   }
 
-  dimension: sales_percentile {
+#   parameter:  input_percentile {
+#     description: "Pass percentile"
+#     type:  number
+#   }
+#
+#   dimension: sales_percentile {
+#     label_from_parameter: input_percentile
+#     type: number
+#     sql: PERCENTILE_CONT(${cum_net_sales},{% parameter input_percentile %})  OVER (PARTITION BY ${category_name},${sub_category_name});;
+#   }
+
+  dimension: lag_cum_sum {
     type: number
-    sql: ${TABLE}.sales_percentile ;;
-
+    sql: ${TABLE}.lag_cum_sum ;;
   }
+
+  dimension: total_cum_sales {
+    type: number
+    sql: ${TABLE}.total_cum_sales ;;
+  }
+
+  dimension:  sales_percentile{
+    type: number
+    sql:  percentile ;;
+  }
+
 
   set: detail {
     fields: [
       upc,
       upc_count,
-      avg_unit,
-      avg_sales,
       category_name,
       sub_category_name,
       description,
